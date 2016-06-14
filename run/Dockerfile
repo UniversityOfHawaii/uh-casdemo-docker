@@ -11,6 +11,6 @@ ADD keystore /root/.keystore
 ADD server.xml /usr/local/tomcat/conf/
 ADD settings.xml /usr/local/tomcat/conf/
 ADD tomcat-users.xml /usr/local/tomcat/conf/
-ADD casdemo.war /usr/local/tomcat/webapps/
+ADD casdemo-dev.war /usr/local/tomcat/webapps/casdemo.war
 ADD overrides.properties /home/casdemod/external-conf
 
