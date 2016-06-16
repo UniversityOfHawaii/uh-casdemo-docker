@@ -4,8 +4,9 @@ MAINTAINER "Erik Meade <uh-casdemo-docker-m@eghm.net>"
 # TODO FINISH, THIS IS A DRAFT WIP
 
 RUN apt-get update && apt-get install -y \
-	git \
-	maven 
+        openjdk-8-jdk \
+        git \
+        maven
 
 RUN git clone https://github.com/fduckart/uh-casdemo.git && mkdir -p /home/casdemod/external-conf/
 # /home/casdemod/external-conf/overrides.properteis as defined in uh-casdemo/src/main/filter/dev-test.properties
@@ -18,8 +19,9 @@ RUN cd uh-casdemo && mvn -Denv=test clean package && cp target/casdemo.war /usr/
 # SSL
 # TODO handle pass phrase
 ADD server.xml /usr/local/tomcat/conf/server.tmpl
-RUN $JAVA_HOME/bin/keytool -genkey -keypass mynewkeypassphrasewillbegenerated -dname "cn=Erik Meade, ou=Container, o=UH, l=Honolulu, st=HI, c=US" -alias tomcat -keyalg RSA
+RUN $JAVA_HOME/bin/keytool -genkey -dname "cn=Author Name, ou=Container, o=UH, l=Honolulu, st=HI, c=US" -alias tomcat -keyalg RSA  -storepass mynewSTOREpassphrasewillbegenerated
+#-keypass mynewkeypassphrasewillbegenerated
 # TODO do these as a && once working
-RUN sed "s|PASSPHRASE|mynewkeypassphrasewillbegenerated|" /user/local/tomcat/conf/server.tmpl > /user/local/tomcat/conf/server.xml
+RUN sed "s|PASSPHRASE|mynewSTOREpassphrasewillbegenerated|" /usr/local/tomcat/conf/server.tmpl > /usr/local/tomcat/conf/server.xml
 
 
