@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 #ADD overrides.properties /home/casdemod/external-conf/overrides.tmpl
 #RUN sed "s|AWSIP|$(curl http://169.254.169.254/latest/meta-data/public-ipv4)|"  /home/casdemod/external-conf/overrides.tmpl >  /home/casdemod/external-conf/overrides.properties && cd uh-casdemo && mvn -Denv=test clean package && cp target/casdemo.war /usr/local/tomcat/webapps/
 
-RUN git clone https://github.com/fduckart/uh-casdemo.git && mv uh-casdemo/build/src/main/filter/env-dev.properties uh-casdemo/build/src/main/filter/env-dev.properties.bak && sed "s|localhost:8080|$(curl http://169.254.169.254/latest/meta-data/public-ipv4)|"  uh-casdemo/build/src/main/filter/env-dev.properties.bak >  uh-casdemo/build/src/main/filter/env-dev.properties && cd uh-casdemo && mvn -Denv=test clean package && cp target/casdemo.war /usr/local/tomcat/webapps/
+RUN git clone https://github.com/fduckart/uh-casdemo.git && mv uh-casdemo/src/main/filter/env-dev.properties uh-casdemo/src/main/filter/env-dev.properties.bak && sed "s|localhost:8080|$(curl http://169.254.169.254/latest/meta-data/public-ipv4)|"  uh-casdemo/src/main/filter/env-dev.properties.bak >  uh-casdemo/src/main/filter/env-dev.properties && cd uh-casdemo && mvn -Denv=test clean package && cp target/casdemo.war /usr/local/tomcat/webapps/
 
 # SSL
 ADD server.xml /usr/local/tomcat/conf/server.tmpl
